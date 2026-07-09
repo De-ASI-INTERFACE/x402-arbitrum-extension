@@ -1,14 +1,13 @@
--- x402-Arbitrum | Author: Richard Patterson
-import Mathlib.Data.Finset.Basic
-namespace X402Arbitrum
-structure PaymentAuth where
-  nonce : Nat; amount : Nat; expires_at : Nat
-  deriving Repr
-structure FacilitatorState where
-  used_nonces : Finset Nat; block_time : Nat
-  deriving Repr
-def verify (a : PaymentAuth) (s : FacilitatorState) : Prop :=
-  a.nonce ∉ s.used_nonces ∧ s.block_time ≤ a.expires_at
-theorem arbitrum_replay_prevented (a : PaymentAuth) (s : FacilitatorState)
-    (h : verify a s) : a.nonce ∉ s.used_nonces := h.1
-end X402Arbitrum
+-- x402-Arbitrum Payment Verification | Author: Richard Patterson
+import X402Arbitrum.Basic
+
+namespace X402Arbitrum.Verification
+
+def settle (a : PaymentAuth) (s : FacilitatorState) (h : verify a s) : FacilitatorState :=
+  { s with used_nonces := s.used_nonces ∪ {a.nonce} }
+
+theorem settled_nonce_recorded (a : PaymentAuth) (s : FacilitatorState) (h : verify a s)
+    : a.nonce ∈ (settle a s h).used_nonces := by
+  simp [settle, Finset.mem_union, Finset.mem_singleton]
+
+end X402Arbitrum.Verification
