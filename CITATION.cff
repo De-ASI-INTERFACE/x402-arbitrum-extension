@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: 'x402-Arbitrum: HTTP 402 Payment-Gated Routing on Arbitrum'
+version: 1.0.0
+date-released: '2026-07-09'
+type: software
+authors:
+  - family-names: Patterson
+    given-names: Richard
+    alias: De-ASI-INTERFACE
+    country: US
+repository-code: 'https://github.com/De-ASI-INTERFACE/x402-arbitrum-extension'
+license: MIT
+abstract: >-
+  x402 HTTP 402 payment-gated routing for Arbitrum One and Nova. ERC-20/ETH
+  payment gates, Stylus Rust/WASM Facilitator, Camelot DEX routing, Nitro
+  fraud proof window awareness, nonce replay prevention, Lean 4 proofs.
+keywords: [arbitrum, nitro, stylus, camelot, x402, http-402, lean4, richard-patterson]
